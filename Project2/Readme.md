@@ -42,8 +42,8 @@ original IP packet
 - Create fake ICMP Redirect packet
   - Use raw socket (SOCK_RAW) transmit self-made IP packet
   - Packet structure：IP Header + ICMP Header + original IP packet (with first 8 bytes)
-- 設置 IP_HDRINCL
-  - 必須使用 setsockopt() 設定 IP_HDRINCL，以手動控制 IP 標頭
+- set IP_HDRINCL
+  - Use setsockopt() to set IP_HDRINCL, and set IP header manually
 
 ### 🧨STEP3 - DNS Spoofing
 Intercept DNS request, analyze the information in the packet, discard it, and send a fake reply back to the victim.
